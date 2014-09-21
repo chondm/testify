@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testify</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+	<% if notice %>
+	  <p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
+	<% end %>
+
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">Testify</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="#">Templates</a></li>
+      <li class="active"><a href="#">Team</a></li>
+      <li class="active"><a href="#">Activity</a></li>
+ 
+
+      <li class="has-form">
+        <div class="row collapse">
+          <div class="large-8 small-9 columns">
+            <input type="text" placeholder="Find Stuff">
+          </div>
+          <div class="large-4 small-3 columns">
+            <a href="#" class="alert button expand">Search</a>
+          </div>
+        </div>
+      </li>
+
+      <% if user_signed_in? %>
+  
+        <li class="has-dropdown">
+          <a href="#"><strong><%= current_user.email %></strong></a>
+          <ul class="dropdown">
+            <li><%= link_to 'Account', edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><%= link_to 'Upgrade', edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+          </ul>
+        </li>
+
+
+
+       <% else %>
+        <li class="active"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> </li>
+        <li class="active"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+      <% end %>
+
+    </ul>
+  </section>
+</nav>
+
+<%= yield %>
+
+</body>
+</html>
